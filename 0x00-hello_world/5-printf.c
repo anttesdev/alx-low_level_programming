@@ -1,10 +1,11 @@
 #include <stdio.h>
 /**
-* Main function
-* return 0 
+* main - print f function
+* Description : print a text
+* Return:(0) returning zero means sucess
 */
 int main(void)
 {
 	printf("with proper grammar, but the outcome is a piece of art,\n");
-			return(0);
+			return (0);
 }
