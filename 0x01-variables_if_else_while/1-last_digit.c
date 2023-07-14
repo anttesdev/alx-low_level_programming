@@ -5,7 +5,7 @@
  * main - entry point for a last digit function
  * Description: more headers goes there
  * Return: (0) it is a sucess
- * betty style doc for function main goes there
+ * betty style doc for function main 
  */
 int main(void)
 {
