@@ -4,9 +4,11 @@
  * Return: 0 is success
  */
 
-int main(void)
+void print_alphabet(void)
 {
-	print_alphabet();
+	char alph;
+	for (alph = 'a'; alph <= 'z' ; alph++)
+		{_putchar(alph);
+		}
 	_putchar('\n');
-	return (0);
 }
