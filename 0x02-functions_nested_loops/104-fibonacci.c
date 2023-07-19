@@ -1,19 +1,15 @@
 #include <stdio.h>
+/**
+  * main - fibonacci up to 10000000
+  * Purpose: no hardcode
+  *
+  * Return:  (Success)
+ */
 
-
-	/**
-	 * main - fibonacci <3
-	 *
-	 * Purpose - no hardcode
-	 *
-	 * Return:  (Success)
-	 */
-
-
-	int main(void)
+int main(void)
 	{
-		unsigned long int i;
-		unsigned long int bef = 1;
+	unsigned long int i;
+	unsigned long int bef = 1;
 		unsigned long int aft = 2;
 		unsigned long int l = 1000000000;
 		unsigned long int bef1;
