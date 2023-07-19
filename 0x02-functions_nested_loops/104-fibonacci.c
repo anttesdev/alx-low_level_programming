@@ -1,48 +1,33 @@
-#include <stdio.h>
-
-/**
- * main - fibonacci <3
- *
- * Purpose - no hardcode
- *
- * Return:  (Success)
- */
-
 int main(void)
 {
-	unsigned long int x;
-	unsigned long int y = 1;
-	unsigned long int z = 2;
-	unsigned long int l = 1000000000;
-	unsigned long int a;
-	unsigned long int b;
-	unsigned long int c;
-	unsigned long int f;
+	unsigned long f1 = 1, f2 = 2, tmp, mx = 100000000, f1o = 0, f2o = 0, tmpo = 0;
+	short int i = 1, initial0s;
 
-	printf("%lu", y);
-
-	for (x = 1; x < 91; x++)
+	while (i <= 98)
 	{
-		printf(", %lu", z);
-		z += y;
-		y = z - y;
-	}
+		if (f1o > 0)
+		printf("%lu", f1o);
+		initial0s = numLength(mx) - 1 - numLength(f1);
+		while (f1o > 0 && initial0s > 0)
+		{
+			printf("%i", 0);
+			initial0s--;
+		}
+		printf("%lu", f1);
 
-	a = (y / l);
-	b = (y % l);
-	c = (y / l);
-	f = (z % l);
+		tmp = (f1 + f2) % mx;
+		tmpo = f1o + f2o + (f1 + f2) / mx;
+		f1 = f2;
+		f1o = f2o;
+		f2 = tmp;
+		f2o = tmpo;
 
-	for (x = 92; x < 99; ++x)
-	{
-		printf(", %lu", c + (f / l));
-		printf("%lu", f % l);
-		c = c + a;
-		a = c - a;
-		f = f + b;
-		b = f - b;
+		if (i != 98)
+			printf(", ");
+		else
+			printf("\n");
+		i++;
 	}
-	printf("\n");
 	return (0);
 }
 
