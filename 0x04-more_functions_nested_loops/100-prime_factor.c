@@ -8,7 +8,7 @@
 int main(void)
 {
 	long int x;
-	long int max;
+	long int add;
 	long int i;
 
 	x = 612852475143;
