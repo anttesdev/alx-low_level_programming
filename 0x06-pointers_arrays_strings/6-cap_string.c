@@ -15,7 +15,7 @@ char *cap_string(char *p)
 	while (p[i])
 	{
 	while (!(p[i] >= 97 && p[i] <= 122))
-	{	
+	{
 		i++;
 	}
 		if
