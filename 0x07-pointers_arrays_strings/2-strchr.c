@@ -8,19 +8,15 @@
  * Return: pointer to the first charachter occurence or NULL
  */
 
-
 char *_strchr(char *s, char c)
 {
-	int x;
+	int i = 0;
 
-	for (x = 0; x >= '\0'; x++)
+	for (; s[i] >= '\0'; i++)
 	{
-		if (s[x] == c)
-		{
-			return (&s[x]);
-		}
+		if (s[i] == c)
+			return (&s[i]);
 	}
-
-		return (0);
+	return (0);
 }
 
