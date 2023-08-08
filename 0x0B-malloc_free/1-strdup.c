@@ -13,14 +13,14 @@ char *_strdup(char *str)
 	int x;
 	int y;
 
-	for (x = 1; str[x] != '\0';)
+	for (x = 0; str[x] != '\0';)
 	{
 		x++;
 	}
 
 	s = malloc((sizeof(char) * x) + 1);
 
-	if (*str == NULL)
+	if (str == NULL)
 		return (NULL);
 
 	if (s == NULL)
@@ -30,8 +30,8 @@ char *_strdup(char *str)
 	{
 		s[y] = str[y];
 	}
-	
+
 	s[y] = '\0';
-	
+
 	return (s);
 }
