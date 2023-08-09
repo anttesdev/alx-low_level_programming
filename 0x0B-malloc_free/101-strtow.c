@@ -2,76 +2,76 @@
 #include "main.h"
 
 /**
- * count_word - helper function to count the number of words in a string
- * @s: string to evaluate
+ * word_count - count the number of words in a string
+ * @s: string to  check
  * Return: number of words
  */
-int count_word(char *s)
+int word_count(char *s)
 {
-	int flag, c, w;
+	int x = 0 , y = 0, words;
 
-	flag = 0;
-	w = 0;
-
-	for (c = 0; s[c] != '\0'; c++)
+	while (s[y] != '\0')
 	{
-		if (s[c] == ' ')
-			flag = 0;
-		else if (flag == 0)
+		if (s[y] == ' ')
+			x = 0;
+		else if (x == 0)
 		{
-			flag = 1;
-			w++;
+			x = 1;
+			words++;
 		}
+	
+		y++;
 	}
 
-	return (w);
+	return (words);
 }
 /**
  * **strtow - splits a string into words
  * @str: string to split
- *
- * Return: pointer to an array of strings (Success)
- * or NULL (Error)
+ * Return: pointer to a multidimensional array or NULL
  */
+
 char **strtow(char *str)
 {
-	char **matrix, *tmp;
-	int i, k = 0, len = 0, words, c = 0, start, end;
+	char **two_d_array, *yet;
+	int x = 0, y = 0, z = 0, len = 0, words, start, end;
 
 	while (*(str + len))
 		len++;
-	words = count_word(str);
+	words = word_count(str);
 	if (words == 0)
 		return (NULL);
 
-	matrix = (char **) malloc(sizeof(char *) * (words + 1));
-	if (matrix == NULL)
+	two_d_array = (char **) malloc(sizeof(char *) * (words + 1));
+	if (two_d_array == NULL)
 		return (NULL);
 
-	for (i = 0; i <= len; i++)
+	while ( x <= len)
 	{
-		if (str[i] == ' ' || str[i] == '\0')
+		if (str[x] == ' ' || str[x] == '\0')
 		{
-			if (c)
+			if (z)
 			{
-				end = i;
-				tmp = (char *) malloc(sizeof(char) * (c + 1));
-				if (tmp == NULL)
+				end = x;
+				yet = (char *) malloc(sizeof(char) * (z + 1));
+				if (yet == NULL)
 					return (NULL);
 				while (start < end)
-					*tmp++ = str[start++];
-				*tmp = '\0';
-				matrix[k] = tmp - c;
-				k++;
-				c = 0;
+					*yet++ = str[start++];
+				*yet = '\0';
+				two_d_array[y] = yet - z;
+				y++;
+				z = 0;
 			}
 		}
-		else if (c++ == 0)
-			start = i;
+		else if (z++ == 0)
+			start = x;
+		x++;
 	}
 
-	matrix[k] = NULL;
+	two_d_array[y] = NULL;
 
-	return (matrix);
+	return (two_d_array);
+
 }
 
