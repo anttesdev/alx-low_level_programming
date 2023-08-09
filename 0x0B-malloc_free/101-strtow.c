@@ -41,6 +41,10 @@ char **strtow(char *str)
 	char **two_arr, *yet;
 	int x = 0, y = 0, z = 0, len = 0, words, start, end;
 
+	if (str == NULL || str[0] == '\0')
+		return (NULL);
+
+
 	while (*(str + len))
 		len++;
 	words = word_count(str);
