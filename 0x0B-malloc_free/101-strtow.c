@@ -8,7 +8,7 @@
  */
 int word_count(char *s)
 {
-	int x = 0 , y = 0, words;
+	int x = 0, y = 0, words;
 
 	while (s[y] != '\0')
 	{
@@ -19,7 +19,7 @@ int word_count(char *s)
 			x = 1;
 			words++;
 		}
-	
+
 		y++;
 	}
 
@@ -46,7 +46,7 @@ char **strtow(char *str)
 	if (two_d_array == NULL)
 		return (NULL);
 
-	while ( x <= len)
+	while (x <= len)
 	{
 		if (str[x] == ' ' || str[x] == '\0')
 		{
