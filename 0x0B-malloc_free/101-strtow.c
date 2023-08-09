@@ -1,81 +1,77 @@
-#include "main.h"
 #include <stdlib.h>
+#include "main.h"
 
 /**
- * word_count - counts the number of words
- * @s: string to be checked
- * Return: the number of words in the string
+ * count_word - helper function to count the number of words in a string
+ * @s: string to evaluate
+ * Return: number of words
  */
-
-
-int word_count(char *s)
+int count_word(char *s)
 {
-	int x = 0, y = 0, words = 0;
+	int flag, c, w;
 
-	while (s[x] != '\0')
+	flag = 0;
+	w = 0;
+
+	for (c = 0; s[c] != '\0'; c++)
 	{
-		if (y == 0)
+		if (s[c] == ' ')
+			flag = 0;
+		else if (flag == 0)
 		{
-			y = 1;
-			words++;
+			flag = 1;
+			w++;
 		}
-
-		else if (s[x] == ' ')
-		{
-			y = 0;
-		}
-
-		x++;
 	}
 
-	return (words);
+	return (w);
 }
-
 /**
  * **strtow - splits a string into words
  * @str: string to split
- * Return: pointer to an array of strings or NULL
+ *
+ * Return: pointer to an array of strings (Success)
+ * or NULL (Error)
  */
 char **strtow(char *str)
 {
-	char **two_arr, *yet;
-	int x = 0, y = 0, z = 0, len = 0, words, start, end;
+	char **matrix, *tmp;
+	int i, k = 0, len = 0, words, c = 0, start, end;
 
 	while (*(str + len))
 		len++;
-	words = word_count(str);
-	if (words == 0 || str[words] == ' ')
+	words = count_word(str);
+	if (words == 0)
 		return (NULL);
 
-	two_arr = (char **) malloc(sizeof(char *) * (words + 1));
-	if (two_arr == NULL)
+	matrix = (char **) malloc(sizeof(char *) * (words + 1));
+	if (matrix == NULL)
 		return (NULL);
 
-	while (x <= len)
+	for (i = 0; i <= len; i++)
 	{
-		if (str[x] == ' ' || str[x] == '\0')
+		if (str[i] == ' ' || str[i] == '\0')
 		{
-			if (z)
+			if (c)
 			{
-				end = x;
-				yet = (char *) malloc(sizeof(char) * (z + 1));
-				if (yet == NULL)
+				end = i;
+				tmp = (char *) malloc(sizeof(char) * (c + 1));
+				if (tmp == NULL)
 					return (NULL);
 				while (start < end)
-					*yet++ = str[start++];
-				*yet = '\0';
-				two_arr[y] = yet - z;
-				y++;
-				z = 0;
+					*tmp++ = str[start++];
+				*tmp = '\0';
+				matrix[k] = tmp - c;
+				k++;
+				c = 0;
 			}
 		}
-		else if (z++ == 0)
-			start = x;
-	x++;
+		else if (c++ == 0)
+			start = i;
 	}
 
-	two_arr[y] = NULL;
+	matrix[k] = NULL;
 
-	return (two_arr);
+	return (matrix);
 }
 
