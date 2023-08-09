@@ -44,7 +44,7 @@ char **strtow(char *str)
 	while (*(str + len))
 		len++;
 	words = word_count(str);
-	if (words == 0)
+	if (words == 0 || str[words] == ' ')
 		return (NULL);
 
 	two_arr = (char **) malloc(sizeof(char *) * (words + 1));
