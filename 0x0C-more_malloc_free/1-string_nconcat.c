@@ -36,11 +36,13 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 
 	for (d = 0; d < a; d++)
 		s[d] = s1[d];
+
 	for (e = 0; n < b && d < (a + n); e++)
 	{
 		s[d] = s2[e];
 		d++;
 	}
+
 	for (e = 0; n >= b && d < (a + b); e++)
 	{	s[d] = s[e];
 		d++;
