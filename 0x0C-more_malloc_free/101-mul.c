@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 /**
- * is_digit - check for a non digit char
+ * _is_digit - check for a non digit char
  * @s: string to be checked
  * Return: 0 if a non-digit is found, 1 otherwise
  */
