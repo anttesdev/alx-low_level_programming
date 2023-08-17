@@ -27,10 +27,10 @@ void print_all(const char * const format, ...)
 					printf("%s%i", separator, va_arg(all, int));
 					break;
 				case 'c':
-					printf("%s%c",separator, va_arg(all ,int));
+					printf("%s%c", separator, va_arg(all, int));
 					break;
 				case 'f':
-					printf("%s%f",separator, va_arg(all ,double));
+					printf("%s%f", separator, va_arg(all, double));
 					break;
 				case 's':
 					s = va_arg(all, char*);
