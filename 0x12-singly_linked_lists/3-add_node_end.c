@@ -28,7 +28,10 @@ list_t *add_node_end(list_t **head, const char *str)
 	added->next = NULL;
 
 	if (*head == NULL)
+	{	
 		*head = added;
+		return (added);
+	}
 	else
 	{
 		rear = *head;
