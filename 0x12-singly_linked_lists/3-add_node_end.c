@@ -23,12 +23,6 @@ list_t *add_node_end(list_t **head, const char *str)
 	if (added == NULL)
 		return (NULL);
 
-	if (str == NULL)
-	{
-		free(added);
-		return (NULL);
-	}
-
 	added->str = strdup(str);
 	added->len = i;
 	added->next = NULL;
