@@ -1,7 +1,7 @@
 #include "lists.h"
 
-
 listint_t *find_listint_loop(listint_t *head);
+
 /**
  * print_listint_safe - prints a linked list whether there is a loop or not
  * @head: head pointer to list to be printed
@@ -32,12 +32,6 @@ size_t print_listint_safe(const listint_t *head)
 
 	return (nodes);
 }
-
-
-
-
-
-#include "lists.h"
 
 /**
  * find_listint_loop - find a loop on a linked list
