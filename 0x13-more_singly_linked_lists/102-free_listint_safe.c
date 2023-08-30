@@ -16,7 +16,7 @@ size_t free_listint_safe(listint_t **h)
 
 	if (!h || !(*h))
 		return (0);
-	
+
 	startloop = find_listint_loop(*h);
 
 	while (*h != startloop && i)
@@ -35,14 +35,14 @@ size_t free_listint_safe(listint_t **h)
 			free((*h)->next);
 			i = 0;
 		}
-		
+
 		free(*h);
-		
+
 		*h = after;
 	}
-	
+
 	*h = NULL;
-	
+
 	return (nodes);
 }
 
