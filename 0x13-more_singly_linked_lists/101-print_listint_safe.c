@@ -1,6 +1,6 @@
 #include "lists.h"
 
-listint_t *find_listint_loop(listint_t *head);
+listint_t *find_listint_loop1(listint_t *head);
 
 /**
  * print_listint_safe - prints a linked list whether there is a loop or not
@@ -34,12 +34,12 @@ size_t print_listint_safe(const listint_t *head)
 }
 
 /**
- * find_listint_loop - find a loop on a linked list
+ * find_listint_loop1 - find a loop on a linked list
  * @head: pointer to first node in listint_t
  * Return: NULL or starting loop node pointer
  */
 
-listint_t *find_listint_loop(listint_t *head)
+listint_t *find_listint_loop1(listint_t *head)
 {
 	listint_t *after, *check;
 
