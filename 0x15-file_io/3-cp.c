@@ -1,30 +1,21 @@
 #include "main.h"
 
 /**
- * check_read - checks whether a file can be opened and read
+ * check_error - checks whether a file can be opened and read
  * @file_from: the file the content to be copied from
+ * @file_to: the file the content will be copied to
  * @argv: array of arguments
  * Return: Nothing
  */
 
-void check_read(int file_from, char *argv[])
+void check_error(int file_from, int file_to, char *argv[])
 {
 	if (file_from == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
 	}
-}
 
-
-/**
- * check_write - checks whether a file can be opened and read
- * @file_to: the file the content is copied to
- * @argv: array of arguments
- * Return: Nothing
- */
-void check_write(int file_to, char *argv[])
-{
 	if (file_to == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
@@ -72,7 +63,7 @@ int main(int argc, char *argv[])
 	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0664);
 	buffer = malloc(sizeof(char) * 1024);
 	if (buffer == NULL)
-		check_write(to, argv);
+		check_error(from, to, argv);
 
 	re = read(from, buffer, 1024);
 
@@ -81,13 +72,13 @@ int main(int argc, char *argv[])
 		if (from == -1 || re == -1)
 		{
 			free(buffer);
-			check_read(from, argv);
+			check_error(from, to, argv);
 		}
 		wr = write(to, buffer, re);
 		if (to == -1 || wr == -1)
 		{
 			free(buffer);
-			check_write(to, argv);
+			check_error(from, to, argv);
 		}
 		re = read(from, buffer, 1024);
 		to = open(argv[2], O_WRONLY | O_APPEND);
