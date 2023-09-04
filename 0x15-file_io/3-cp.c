@@ -63,10 +63,11 @@ int main(int argc, char *argv[])
 	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0664);
 	buffer = malloc(sizeof(char) * 1024);
 	if (buffer == NULL)
-		check_error(from, to, argv);
-
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		exit(99);
+	}
 	re = read(from, buffer, 1024);
-
 	while (re > 0)
 	{
 		if (from == -1 || re == -1)
