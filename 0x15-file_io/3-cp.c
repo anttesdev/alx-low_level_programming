@@ -9,7 +9,7 @@
 
 void check_read(int file_from, char *argv[])
 {
-	if (file_from < 0)
+	if (file_from == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
@@ -25,7 +25,7 @@ void check_read(int file_from, char *argv[])
  */
 void check_write(int file_to, char *argv[])
 {
-	if (file_to < 0)
+	if (file_to == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 		exit(99);
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to");
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
 	from = open(argv[1], O_RDONLY);
@@ -89,6 +89,7 @@ int main(int argc, char *argv[])
 			free(buffer);
 			check_write(to, argv);
 		}
+		re = read(from, buffer, 1024);
 		to = open(argv[2], O_WRONLY | O_APPEND);
 	}
 	free(buffer);
@@ -96,11 +97,6 @@ int main(int argc, char *argv[])
 	close_f(to);
 	return (0);
 }
-
-
-
-
-
 
 
 
