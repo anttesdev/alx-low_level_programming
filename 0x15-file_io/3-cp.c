@@ -52,7 +52,7 @@ void close_f(int file)
 int main(int argc, char *argv[])
 {
 	int from, to, re, wr;
-	char *buffer;
+	char buffer[1024];
 
 	if (argc != 3)
 	{
@@ -61,30 +61,20 @@ int main(int argc, char *argv[])
 	}
 	from = open(argv[1], O_RDONLY);
 	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0664);
-	buffer = malloc(sizeof(char) * 1024);
-	if (buffer == NULL)
+
+	check_error(from, to, argv);
+
+	re = 1024;
+
+	while (re == 1024)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-		exit(99);
-	}
-	re = read(from, buffer, 1024);
-	while (re > 0)
-	{
-		if (from == -1 || re == -1)
-		{
-			free(buffer);
-			check_error(from, to, argv);
-		}
-		wr = write(to, buffer, re);
-		if (to == -1 || wr == -1)
-		{
-			free(buffer);
-			check_error(from, to, argv);
-		}
 		re = read(from, buffer, 1024);
-		to = open(argv[2], O_WRONLY | O_APPEND);
+		if (re == -1)
+			check_error(-1, 0, argv);
+		wr = write(to, buffer, re);
+		if (wr == -1)
+			check_error(0, -1, argv);
 	}
-	free(buffer);
 	close_f(from);
 	close_f(to);
 	return (0);
