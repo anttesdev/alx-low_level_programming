@@ -36,7 +36,7 @@ void close_f(int file)
 
 	if (cl == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close file %d\n", file);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file);
 		exit(100);
 	}
 }
@@ -75,6 +75,7 @@ int main(int argc, char *argv[])
 		if (wr == -1)
 			check_error(0, -1, argv);
 	}
+
 	close_f(from);
 	close_f(to);
 	return (0);
