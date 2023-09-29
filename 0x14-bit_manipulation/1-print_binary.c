@@ -8,7 +8,7 @@ void print_binary(unsigned long int n)
 {
 	unsigned long int position = 1UL << (sizeof(unsigned long int) * 8 - 1);
 	int set = 0;
-	
+
 	while (position > 0)
 	{
 		if (n & position)
@@ -20,7 +20,7 @@ void print_binary(unsigned long int n)
 		{
 			_putchar('0');
 		}
-		
+
 		position >>= 1;
 	}
 	if (!set)
