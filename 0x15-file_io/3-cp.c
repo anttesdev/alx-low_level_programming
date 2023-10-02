@@ -42,13 +42,15 @@ int main(int argc, char **argv)
 		dprintf(STDERR_FILENO, "%s\n", "Usage: cp file_from file_to");
 		exit(97);
 	}
-
 	src = open(argv[1], O_RDONLY);
-	dest = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR |
-		S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
-
+	dest = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	if (dest == -1)
+	{
+		close(src);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		exit(99);
+	}
 	handle_error(src, dest, argv);
-
 	while ((char_count = read(src, buff, BUFFER)) > 0)
 	{
 		wr = write(dest, buff, char_count);
