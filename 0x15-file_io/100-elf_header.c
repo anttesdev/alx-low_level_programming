@@ -11,7 +11,6 @@ void exposeElfFileType(unsigned int fileType, unsigned char *magicNumbers);
 void revealElfEntryPoint(unsigned long int entryPoint, unsigned char *magicNumbers);
 void terminateElfFile(int fileDescriptor);
 
-
 /**
  * verifyElfFile - Ensures that a file is an ELF file.
  * @magicNumbers: A pointer to an array containing the ELF magic numbers.
@@ -194,8 +193,7 @@ void terminateElfFile(int fileDescriptor)
 }
 
 /**
- * main - Displays the information contained in the
- *        ELF header at the start of an ELF file.
+ * main - Displays the information contained in the ELF header at the start of an ELF file.
  * @argumentCount: The number of arguments supplied to the program.
  * @arguments: An array of pointers to the arguments.
  *
@@ -206,8 +204,8 @@ void terminateElfFile(int fileDescriptor)
  */
 int main(int __attribute__((__unused__)) argumentCount, char *arguments[])
 {
-    Elf64_Ehdr *header;
-    int fileDescriptor, bytesRead;
+    Elf64_Ehdr header;
+    int fileDescriptor;
 
     fileDescriptor = open(arguments[1], O_RDONLY);
     if (fileDescriptor == -1)
@@ -216,36 +214,25 @@ int main(int __attribute__((__unused__)) argumentCount, char *arguments[])
         exit(98);
     }
 
-    header = malloc(sizeof(Elf64_Ehdr));
-    if (header == NULL)
+    if (read(fileDescriptor, &header, sizeof(Elf64_Ehdr)) == -1)
     {
-        terminateElfFile(fileDescriptor);
-        dprintf(STDERR_FILENO, "Error: Can't read file %s\n", arguments[1]);
-        exit(98);
-    }
-
-    bytesRead = read(fileDescriptor, header, sizeof(Elf64_Ehdr));
-    if (bytesRead == -1)
-    {
-        free(header);
         terminateElfFile(fileDescriptor);
         dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", arguments[1]);
         exit(98);
     }
 
-    verifyElfFile(header->e_ident);
+    verifyElfFile(header.e_ident);
 
     printf("ELF Header:\n");
-    displayElfMagic(header->e_ident);
-    showElfClass(header->e_ident);
-    revealElfDataFormat(header->e_ident);
-    exposeElfVersion(header->e_ident);
-    unveilElfOsAbi(header->e_ident);
-    unveilElfAbiVersion(header->e_ident);
-    exposeElfFileType(header->e_type, header->e_ident);
-    revealElfEntryPoint(header->e_entry, header->e_ident);
+    displayElfMagic(header.e_ident);
+    showElfClass(header.e_ident);
+    revealElfDataFormat(header.e_ident);
+    exposeElfVersion(header.e_ident);
+    unveilElfOsAbi(header.e_ident);
+    unveilElfAbiVersion(header.e_ident);
+    exposeElfFileType(header.e_type, header.e_ident);
+    revealElfEntryPoint(header.e_entry, header.e_ident);
 
-    free(header);
     terminateElfFile(fileDescriptor);
     return 0;
 }
