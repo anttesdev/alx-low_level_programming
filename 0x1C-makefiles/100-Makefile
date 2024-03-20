@@ -5,14 +5,9 @@ NAME = school
 CFLAGS := -Wall -Werror -Wextra -pedantic
 RM = rm -f
 
-all:
-ifeq ($(wildcard m.h),)
-    $(error "Header file m.h is missing")
-else
-    $(MAKE) $(NAME)
-endif
+all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): m.h $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@
 
 clean:
